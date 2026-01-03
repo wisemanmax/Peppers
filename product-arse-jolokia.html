@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arse'olova Jolokia - Delaware Pepper Co.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --flame-red: #E63946;
+            --deep-red: #A4161A;
+            --burnt-orange: #F77F00;
+            --cream: #F8F4E8;
+            --charcoal: #1D1D1D;
+            --smoke: #4A4A4A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--flame-red);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease, opacity 0.3s ease;
+            mix-blend-mode: difference;
+        }
+
+        #custom-cursor.hover {
+            transform: scale(2);
+            background: var(--flame-red);
+            opacity: 0.3;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(29, 29, 29, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--cream);
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--flame-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .product-hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 140px 60px 60px;
+            gap: 80px;
+            max-width: 1600px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .product-image-section {
+            position: relative;
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .product-image-main {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 50%, #FF4500 100%);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.4), inset 0 0 100px rgba(255,255,255,0.05);
+        }
+
+        .product-image-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-10%, 10%); }
+        }
+
+        .heat-badge-large {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(230, 57, 70, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            border-radius: 50px;
+            color: white;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            box-shadow: 0 10px 40px rgba(230, 57, 70, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .product-info-section {
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .product-category {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--burnt-orange);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .product-title {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--charcoal);
+            line-height: 0.95;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .product-shu-display {
+            display: inline-block;
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            letter-spacing: 0.1em;
+        }
+
+        .product-description {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--smoke);
+            margin-bottom: 40px;
+            border-left: 4px solid var(--flame-red);
+            padding-left: 30px;
+        }
+
+        .product-specs {
+            background: white;
+            border: 3px solid var(--charcoal);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--cream);
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+        }
+
+        .spec-value {
+            color: var(--smoke);
+            font-size: 1.1rem;
+        }
+
+        .checkout-section {
+            background: linear-gradient(135deg, var(--charcoal) 0%, #2a2a2a 100%);
+            padding: 50px;
+            border-radius: 4px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(247, 127, 0, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .checkout-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .checkout-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--cream);
+            margin-bottom: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        .checkout-subtitle {
+            color: rgba(248, 244, 232, 0.7);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .quantity-selector {
+            margin-bottom: 30px;
+        }
+
+        .quantity-label {
+            color: var(--cream);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .quantity-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--cream);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+
+        .quantity-btn:hover {
+            background: var(--burnt-orange);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .quantity-display {
+            font-family: 'Anton', sans-serif;
+            font-size: 2.5rem;
+            color: var(--cream);
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .unit-selector {
+            margin-bottom: 30px;
+        }
+
+        .unit-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .unit-option {
+            background: rgba(248, 244, 232, 0.1);
+            border: 2px solid rgba(248, 244, 232, 0.3);
+            padding: 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .unit-option:hover {
+            border-color: var(--burnt-orange);
+            background: rgba(247, 127, 0, 0.2);
+        }
+
+        .unit-option.active {
+            border-color: var(--flame-red);
+            background: rgba(230, 57, 70, 0.2);
+        }
+
+        .unit-option input[type="radio"] {
+            display: none;
+        }
+
+        .unit-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin-bottom: 5px;
+            letter-spacing: 0.1em;
+        }
+
+        .unit-price {
+            color: rgba(248, 244, 232, 0.7);
+            font-size: 0.95rem;
+        }
+
+        .price-display {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--flame-red);
+        }
+
+        .price-label {
+            color: rgba(248, 244, 232, 0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-family: 'Anton', sans-serif;
+            font-size: 3rem;
+            color: var(--cream);
+            line-height: 1;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 25px;
+            background: var(--flame-red);
+            color: white;
+            border: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .checkout-btn:hover::before {
+            left: 100%;
+        }
+
+        .checkout-btn:hover {
+            background: var(--deep-red);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.5);
+        }
+
+        .contact-note {
+            text-align: center;
+            margin-top: 20px;
+            color: rgba(248, 244, 232, 0.6);
+            font-size: 0.95rem;
+        }
+
+        .contact-note a {
+            color: var(--burnt-orange);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-note a:hover {
+            color: var(--flame-red);
+        }
+
+        .details-section {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 80px 60px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .detail-card {
+            background: white;
+            border: 3px solid var(--charcoal);
+            padding: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
+        }
+
+        .detail-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .detail-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            letter-spacing: 0.1em;
+        }
+
+        .detail-text {
+            color: var(--smoke);
+            line-height: 1.7;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--flame-red);
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 968px) {
+            .product-hero {
+                grid-template-columns: 1fr;
+                padding: 120px 30px 60px;
+            }
+            nav {
+                padding: 20px 30px;
+            }
+            .nav-links {
+                gap: 20px;
+                font-size: 0.85rem;
+            }
+            .details-section {
+                padding: 60px 30px;
+            }
+            body {
+                cursor: auto;
+            }
+            #custom-cursor {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+
+    <nav>
+        <div class="logo">DELAWARE PEPPER CO.</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="index.html#story">Story</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="product-hero">
+        <div class="product-image-section">
+            <a href="products.html" class="back-link">← Back to All Products</a>
+            <div class="product-image-main">
+                <span class="heat-badge-large">🌶️ EXTREME HEAT</span>
+            </div>
+        </div>
+
+        <div class="product-info-section">
+            <p class="product-category">Pure Pepper Flakes</p>
+            <h1 class="product-title">Arse'olova<br>Jolokia</h1>
+            <span class="product-shu-display">855,000 - 1,040,000 SHU</span>
+            
+            <p class="product-description">The Arse'olova Jolokia brings serious firepower with a deceptively sweet entry. Don't be fooled by the initial flavor—this Ghost Pepper variant builds to an intense, lingering burn that showcases why it's one of the world's hottest peppers.</p>
+
+            <div class="product-specs">
+                <div class="spec-row">
+                    <span class="spec-label">Heat Level</span>
+                    <span class="spec-value">Extreme Heat</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">SHU Range</span>
+                    <span class="spec-value">855,000 - 1,040,000 SHU</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">Flavor Profile</span>
+                    <span class="spec-value">Heat with a sweet taste</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-label">Type</span>
+                    <span class="spec-value">Pure Pepper Flakes</span>
+                </div>
+            </div>
+
+            <div class="checkout-section">
+                <div class="checkout-content">
+                    <h3 class="checkout-title">Order Now</h3>
+                    <p class="checkout-subtitle">Handcrafted in small batches in Delaware</p>
+
+                    <div class="quantity-selector">
+                        <label class="quantity-label">Quantity (Grams)</label>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
+                            <span class="quantity-display" id="quantity">10</span>
+                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                        </div>
+                    </div>
+
+                    <div class="unit-selector">
+                        <label class="quantity-label">Select Package</label>
+                        <div class="unit-options">
+                            <label class="unit-option active">
+                                <input type="radio" name="unit" value="sample" checked>
+                                <div class="unit-name">Sample</div>
+                                <div class="unit-price">10g - Perfect to try</div>
+                            </label>
+                            <label class="unit-option">
+                                <input type="radio" name="unit" value="standard">
+                                <div class="unit-name">Standard</div>
+                                <div class="unit-price">50g - Most popular</div>
+                            </label>
+                            <label class="unit-option">
+                                <input type="radio" name="unit" value="bulk">
+                                <div class="unit-name">Bulk</div>
+                                <div class="unit-price">100g - Best value</div>
+                            </label>
+                            <label class="unit-option">
+                                <input type="radio" name="unit" value="custom">
+                                <div class="unit-name">Custom</div>
+                                <div class="unit-price">Your choice</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="price-display">
+                        <div class="price-label">Contact for Pricing</div>
+                        <div class="price-amount">INQUIRY</div>
+                    </div>
+
+                    <button class="checkout-btn" onclick="initiateCheckout()">Request Quote</button>
+                    
+                    <p class="contact-note">
+                        Email us at <a href="mailto:Htam@delawarepepperco.com">Htam@delawarepepperco.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="details-section">
+        <div class="details-grid">
+            <div class="detail-card">
+                <div class="detail-icon">🌶️</div>
+                <h3 class="detail-title">Ghost Pepper Power</h3>
+                <p class="detail-text">A variant of the legendary Bhut Jolokia, bringing authentic superhot intensity with every flake.</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">🍯</div>
+                <h3 class="detail-title">Sweet Start</h3>
+                <p class="detail-text">Initial sweetness quickly gives way to volcanic heat. A rollercoaster experience for heat seekers.</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">⚡</div>
+                <h3 class="detail-title">Lingering Burn</h3>
+                <p class="detail-text">The heat builds and persists, providing a long-lasting kick that demands respect.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        const links = document.querySelectorAll('a, button, label');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        function increaseQuantity() {
+            const quantityEl = document.getElementById('quantity');
+            let current = parseInt(quantityEl.textContent);
+            quantityEl.textContent = current + 5;
+        }
+
+        function decreaseQuantity() {
+            const quantityEl = document.getElementById('quantity');
+            let current = parseInt(quantityEl.textContent);
+            if (current > 5) {
+                quantityEl.textContent = current - 5;
+            }
+        }
+
+        document.querySelectorAll('.unit-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.unit-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                this.querySelector('input[type="radio"]').checked = true;
+                
+                const value = this.querySelector('input').value;
+                const quantityEl = document.getElementById('quantity');
+                if (value === 'sample') quantityEl.textContent = '10';
+                else if (value === 'standard') quantityEl.textContent = '50';
+                else if (value === 'bulk') quantityEl.textContent = '100';
+            });
+        });
+
+        function initiateCheckout() {
+            const quantity = document.getElementById('quantity').textContent;
+            const unit = document.querySelector('.unit-option.active .unit-name').textContent;
+            const subject = encodeURIComponent('Arse'olova Jolokia - Order Inquiry');
+            const body = encodeURIComponent(`Hi Delaware Pepper Co,
+
+I'm interested in ordering Arse'olova Jolokia pepper flakes.
+
+Details:
+- Product: Arse'olova Jolokia
+- Package: ${unit}
+- Quantity: ${quantity}g
+
+Please send me pricing and availability information.
+
+Thank you!`);
+            
+            window.location.href = `mailto:Htam@delawarepepperco.com?subject=${subject}&body=${body}`;
+        }
+    </script>
+</body>
+</html>
