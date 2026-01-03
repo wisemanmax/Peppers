@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoville Scale - Heat Reference | Delaware Pepper Co.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Crimson+Pro:wght@400;600;700&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --flame-red: #E63946;
+            --deep-red: #A4161A;
+            --burnt-orange: #F77F00;
+            --cream: #F8F4E8;
+            --charcoal: #1D1D1D;
+            --smoke: #4A4A4A;
+            --hot-gradient: linear-gradient(135deg, #DC143C 0%, #FF4500 100%);
+            --medium-gradient: linear-gradient(135deg, #FF8C00 0%, #FFD700 100%);
+            --mild-gradient: linear-gradient(135deg, #FFD700 0%, #90EE90 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: #0a0a0a;
+            color: var(--cream);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor - Flame */
+        #custom-cursor {
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease;
+        }
+
+        #custom-cursor::before {
+            content: '🔥';
+            font-size: 30px;
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            animation: flameFlicker 0.3s infinite alternate;
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: scale(1) rotate(-5deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(230, 57, 70, 0.2);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--cream);
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--flame-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(230, 57, 70, 0.3) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #FFD700 0%, #FF4500 50%, #DC143C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            letter-spacing: -0.05em;
+            animation: slideInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            text-transform: uppercase;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            color: var(--cream);
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-out 0.3s backwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 3rem;
+            color: var(--flame-red);
+            display: block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(20px); }
+        }
+
+        /* Heat Scale Section */
+        .heat-scale-section {
+            min-height: 100vh;
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .section-intro {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-intro h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--flame-red);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .section-intro p {
+            font-size: 1.5rem;
+            color: rgba(248, 244, 232, 0.8);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Heat Categories */
+        .heat-categories {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 100px;
+            flex-wrap: wrap;
+        }
+
+        .category-badge {
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .category-badge.extreme {
+            background: var(--hot-gradient);
+            border-color: #DC143C;
+        }
+
+        .category-badge.hot {
+            background: linear-gradient(135deg, #FF4500 0%, #FF8C00 100%);
+            border-color: #FF4500;
+        }
+
+        .category-badge.medium {
+            background: var(--medium-gradient);
+            border-color: #FF8C00;
+            color: var(--charcoal);
+        }
+
+        .category-badge.mild {
+            background: var(--mild-gradient);
+            border-color: #FFD700;
+            color: var(--charcoal);
+        }
+
+        .category-badge:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.4);
+        }
+
+        /* Pepper List */
+        .pepper-list {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pepper-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            align-items: center;
+            padding: 40px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 5px solid;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pepper-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .pepper-item:hover::before {
+            left: 100%;
+        }
+
+        .pepper-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .pepper-item:hover {
+            transform: translateX(10px) scale(1.02);
+            box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .pepper-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .pepper-flames {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .flame-icon {
+            font-size: 2rem;
+            filter: drop-shadow(0 0 10px currentColor);
+            animation: flameWave 1.5s ease-in-out infinite;
+        }
+
+        .flame-icon:nth-child(2) { animation-delay: 0.2s; }
+        .flame-icon:nth-child(3) { animation-delay: 0.4s; }
+        .flame-icon:nth-child(4) { animation-delay: 0.6s; }
+        .flame-icon:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes flameWave {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-5px) scale(1.1); }
+        }
+
+        .pepper-shu {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+            text-align: right;
+        }
+
+        /* Color coding for heat levels */
+        .pepper-item[data-heat="extreme"] {
+            border-left-color: #DC143C;
+        }
+
+        .pepper-item[data-heat="extreme"] .pepper-name {
+            color: #FF4500;
+        }
+
+        .pepper-item[data-heat="extreme"] .flame-icon {
+            color: #DC143C;
+        }
+
+        .pepper-item[data-heat="hot"] {
+            border-left-color: #FF4500;
+        }
+
+        .pepper-item[data-heat="hot"] .pepper-name {
+            color: #FF8C00;
+        }
+
+        .pepper-item[data-heat="hot"] .flame-icon {
+            color: #FF4500;
+        }
+
+        .pepper-item[data-heat="medium"] {
+            border-left-color: #FF8C00;
+        }
+
+        .pepper-item[data-heat="medium"] .pepper-name {
+            color: #FFD700;
+        }
+
+        .pepper-item[data-heat="medium"] .flame-icon {
+            color: #FF8C00;
+        }
+
+        .pepper-item[data-heat="mild"] {
+            border-left-color: #FFD700;
+        }
+
+        .pepper-item[data-heat="mild"] .pepper-name {
+            color: #98FB98;
+        }
+
+        .pepper-item[data-heat="mild"] .flame-icon {
+            color: #FFD700;
+        }
+
+        /* Visual Heat Meter */
+        .heat-meter {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            z-index: 100;
+        }
+
+        .meter-bar {
+            width: 100%;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .meter-fill {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(to top, #90EE90, #FFD700, #FF8C00, #FF4500, #DC143C);
+            transition: height 0.3s ease;
+            border-radius: 30px;
+        }
+
+        .meter-label {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            text-align: center;
+            margin-top: 15px;
+            letter-spacing: 0.1em;
+            color: var(--cream);
+        }
+
+        /* Info Cards */
+        .info-section {
+            padding: 120px 60px;
+            background: rgba(10, 10, 10, 0.5);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 10px;
+            border: 2px solid rgba(230, 57, 70, 0.3);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--flame-red);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.3);
+        }
+
+        .info-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .info-title {
+            font-family: 'Anton', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--burnt-orange);
+            letter-spacing: 0.05em;
+        }
+
+        .info-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(248, 244, 232, 0.8);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: var(--flame-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.4);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                gap: 20px;
+                font-size: 0.85rem;
+            }
+
+            .pepper-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .pepper-shu {
+                text-align: center;
+            }
+
+            .pepper-flames {
+                justify-content: center;
+            }
+
+            .heat-meter {
+                display: none;
+            }
+
+            .heat-scale-section {
+                padding: 80px 30px;
+            }
+
+            .info-section {
+                padding: 80px 30px;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            #custom-cursor {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+
+    <nav>
+        <div class="logo">DELAWARE PEPPER CO.</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="heat-reference.html">Heat Reference</a></li>
+            <li><a href="index.html#story">Story</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>SCOVILLE</h1>
+            <p class="hero-subtitle">The Ultimate Heat Reference</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section class="heat-scale-section">
+        <div class="section-intro">
+            <h2>Know Your Heat</h2>
+            <p>The Scoville Scale measures the heat of peppers in Scoville Heat Units (SHU). From mild to volcanic, discover where your favorite peppers rank.</p>
+        </div>
+
+        <div class="heat-categories">
+            <div class="category-badge extreme">EXTREME</div>
+            <div class="category-badge hot">HOT</div>
+            <div class="category-badge medium">MEDIUM</div>
+            <div class="category-badge mild">MILD</div>
+        </div>
+
+        <div class="pepper-list">
+            <!-- Extreme Heat -->
+            <div class="pepper-item" data-heat="extreme" data-shu="2200000">
+                <div class="pepper-name">Carolina Reaper</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">1,400,000 - 2,200,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="extreme" data-shu="2000000">
+                <div class="pepper-name">Trinidad Scorpion</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">1,200,000 - 2,000,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="extreme" data-shu="1041000">
+                <div class="pepper-name">Ghost</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">855,000 - 1,041,000</div>
+            </div>
+
+            <!-- Hot -->
+            <div class="pepper-item" data-heat="hot" data-shu="577000">
+                <div class="pepper-name">Chocolate Habanero</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">425,000 - 577,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="hot" data-shu="500000">
+                <div class="pepper-name">Red Savina</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">350,000 - 500,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="hot" data-shu="325000">
+                <div class="pepper-name">Fatali</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">125,000 - 325,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="hot" data-shu="350000">
+                <div class="pepper-name">Habanero</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">100,000 - 350,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="hot" data-shu="350000">
+                <div class="pepper-name">Scotch Bonnet</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">100,000 - 350,000</div>
+            </div>
+
+            <!-- Medium -->
+            <div class="pepper-item" data-heat="medium" data-shu="100000">
+                <div class="pepper-name">Thai</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">50,000 - 100,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="medium" data-shu="50000">
+                <div class="pepper-name">Cayenne</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">30,000 - 50,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="medium" data-shu="50000">
+                <div class="pepper-name">Tabasco</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">30,000 - 50,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="medium" data-shu="23000">
+                <div class="pepper-name">Serrano</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">6,000 - 23,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="medium" data-shu="10000">
+                <div class="pepper-name">Hungarian</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">5,000 - 10,000</div>
+            </div>
+
+            <!-- Mild -->
+            <div class="pepper-item" data-heat="mild" data-shu="8000">
+                <div class="pepper-name">Jalapeño</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">2,500 - 8,000</div>
+            </div>
+
+            <div class="pepper-item" data-heat="mild" data-shu="1500">
+                <div class="pepper-name">Poblano</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">1,000 - 1,500</div>
+            </div>
+
+            <div class="pepper-item" data-heat="mild" data-shu="2500">
+                <div class="pepper-name">Anaheim</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">500 - 2,500</div>
+            </div>
+
+            <div class="pepper-item" data-heat="mild" data-shu="500">
+                <div class="pepper-name">Pepperoncini</div>
+                <div class="pepper-flames">
+                    <span class="flame-icon">🔥</span>
+                </div>
+                <div class="pepper-shu">100 - 500</div>
+            </div>
+
+            <div class="pepper-item" data-heat="mild" data-shu="0">
+                <div class="pepper-name">Bell</div>
+                <div class="pepper-flames">
+                    <span style="opacity: 0.3;">🔥</span>
+                </div>
+                <div class="pepper-shu">0 - 0</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <div class="info-grid">
+            <div class="info-card">
+                <span class="info-icon">🌡️</span>
+                <h3 class="info-title">What is SHU?</h3>
+                <p class="info-text">Scoville Heat Units measure the concentration of capsaicin, the chemical compound that creates the burning sensation. The higher the SHU, the hotter the pepper.</p>
+            </div>
+            <div class="info-card">
+                <span class="info-icon">🧪</span>
+                <h3 class="info-title">How It's Measured</h3>
+                <p class="info-text">Originally tested by diluting pepper extract until heat was no longer detectable. Modern testing uses high-performance liquid chromatography for precision.</p>
+            </div>
+            <div class="info-card">
+                <span class="info-icon">🔬</span>
+                <h3 class="info-title">Delaware Tested</h3>
+                <p class="info-text">Every batch of Delaware Pepper Co. flakes is tested for consistency. We ensure you get the exact heat level you expect, every time.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="heat-meter">
+        <div class="meter-bar">
+            <div class="meter-fill" id="meterFill"></div>
+        </div>
+        <div class="meter-label">HEAT LEVEL</div>
+    </div>
+
+    <div class="back-to-top" id="backToTop">
+        ↑
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.pepper-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Heat Meter Update on Scroll
+        const meterFill = document.getElementById('meterFill');
+        const pepperItems = document.querySelectorAll('.pepper-item');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrolled / docHeight) * 100;
+            
+            meterFill.style.height = scrollPercent + '%';
+
+            // Find which pepper is in view
+            let maxSHU = 2200000;
+            pepperItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
+                    const shu = parseInt(item.dataset.shu);
+                    const heatPercent = (shu / maxSHU) * 100;
+                    meterFill.style.height = heatPercent + '%';
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Category Badge Click Filter
+        const categoryBadges = document.querySelectorAll('.category-badge');
+        categoryBadges.forEach(badge => {
+            badge.addEventListener('click', () => {
+                const category = badge.classList[1];
+                
+                pepperItems.forEach(item => {
+                    const itemHeat = item.dataset.heat;
+                    if (category && itemHeat === category) {
+                        item.style.display = 'grid';
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
