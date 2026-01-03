@@ -21,6 +21,24 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(230, 57, 70, 0.25);
+            color: var(--charcoal);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px dashed var(--burnt-orange);
+            outline-offset: 4px;
+        }
+
+
         body {
             font-family: 'Crimson Pro', serif;
             background: var(--cream);
@@ -33,22 +51,24 @@
             cursor: none;
         }
 
+        
         #custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--flame-red);
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.15s ease, opacity 0.3s ease;
-            mix-blend-mode: difference;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23E63946' d='M42 8c-6 2-10 7-11 14-9 2-16 10-15 20 1 12 12 18 23 15 10-2 19-12 19-24 0-11-6-20-16-25z'/><path fill='%23228B22' d='M38 6c1-4 4-6 9-6 2 6-1 10-6 12-3 2-5 4-7 7-1-5 0-9 4-13z'/><path fill='%23B71C1C' d='M24 32c-4 2-6 6-5 10 1 6 7 9 13 8 5-1 10-6 9-12-1-6-6-9-12-8z' opacity='0.35'/></svg>");
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: translate(-50%, -50%);
+            transition: transform 0.12s ease, filter 0.2s ease, opacity 0.2s ease;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
         }
 
         #custom-cursor.hover {
-            transform: scale(2);
-            background: var(--flame-red);
-            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(1.2) rotate(-12deg);
+            filter: drop-shadow(0 8px 16px rgba(230, 57, 70, 0.45));
         }
 
         /* Hero Section */
@@ -79,6 +99,17 @@
                 );
             pointer-events: none;
             animation: grain 8s steps(10) infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(230, 57, 70, 0.3), transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(247, 127, 0, 0.25), transparent 50%);
+            mix-blend-mode: screen;
+            opacity: 0.8;
+            pointer-events: none;
         }
 
         @keyframes grain {
@@ -181,6 +212,7 @@
             justify-content: space-between;
             align-items: center;
             background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
         }
 
         .logo {
@@ -249,25 +281,31 @@
         .product-card {
             position: relative;
             transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            border: 1px solid rgba(29, 29, 29, 0.08);
         }
 
         .product-card:hover {
-            transform: translateY(-10px) rotate(-2deg);
+            transform: translateY(-12px) rotate(-1deg);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.18);
         }
 
         .product-card:nth-child(even):hover {
-            transform: translateY(-10px) rotate(2deg);
+            transform: translateY(-12px) rotate(1deg);
         }
 
         .product-image {
             width: 100%;
             aspect-ratio: 3/4;
             background: linear-gradient(135deg, var(--deep-red), var(--burnt-orange));
-            border-radius: 2px;
+            border-radius: 18px;
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
         }
 
         .product-image::before {
@@ -324,8 +362,8 @@
 
         .btn {
             display: inline-block;
-            padding: 15px 40px;
-            background: var(--charcoal);
+            padding: 16px 44px;
+            background: linear-gradient(135deg, var(--charcoal), #2b2b2b);
             color: var(--cream);
             text-decoration: none;
             text-transform: uppercase;
@@ -336,6 +374,8 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border-radius: 999px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
         }
 
         .btn::before {
@@ -345,7 +385,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: var(--flame-red);
+            background: linear-gradient(135deg, var(--flame-red), var(--burnt-orange));
             transition: left 0.3s ease;
             z-index: -1;
         }
@@ -633,7 +673,7 @@
                 <h3 class="product-name">First State Fire</h3>
                 <p class="product-desc">A balanced blend of roasted habaneros and local honey. Perfect for everyday heat lovers.</p>
                 <p class="product-price">$12.99</p>
-                <a href="#" class="btn">Add to Cart</a>
+                <a href="products.html" class="btn">View Details</a>
             </div>
 
             <div class="product-card" data-animate>
@@ -643,7 +683,7 @@
                 <h3 class="product-name">Coastal Burn</h3>
                 <p class="product-desc">Ghost peppers meet Delaware sea salt in this smoky, savory masterpiece.</p>
                 <p class="product-price">$14.99</p>
-                <a href="#" class="btn">Add to Cart</a>
+                <a href="products.html" class="btn">View Details</a>
             </div>
 
             <div class="product-card" data-animate>
@@ -653,7 +693,7 @@
                 <h3 class="product-name">Diamond State Destroyer</h3>
                 <p class="product-desc">Carolina Reaper madness with a hint of sweetness. Not for the faint of heart.</p>
                 <p class="product-price">$16.99</p>
-                <a href="#" class="btn">Add to Cart</a>
+                <a href="products.html" class="btn">View Details</a>
             </div>
         </div>
     </section>

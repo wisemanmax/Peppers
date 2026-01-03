@@ -21,6 +21,24 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        ::selection {
+            background: rgba(230, 57, 70, 0.25);
+            color: var(--charcoal);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible {
+            outline: 2px dashed var(--burnt-orange);
+            outline-offset: 4px;
+        }
+
+
         body {
             font-family: 'Crimson Pro', serif;
             background: var(--cream);
@@ -29,22 +47,24 @@
             cursor: none;
         }
 
+        
         #custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--flame-red);
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
             position: fixed;
             pointer-events: none;
             z-index: 9999;
-            transition: transform 0.15s ease, opacity 0.3s ease;
-            mix-blend-mode: difference;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23E63946' d='M42 8c-6 2-10 7-11 14-9 2-16 10-15 20 1 12 12 18 23 15 10-2 19-12 19-24 0-11-6-20-16-25z'/><path fill='%23228B22' d='M38 6c1-4 4-6 9-6 2 6-1 10-6 12-3 2-5 4-7 7-1-5 0-9 4-13z'/><path fill='%23B71C1C' d='M24 32c-4 2-6 6-5 10 1 6 7 9 13 8 5-1 10-6 9-12-1-6-6-9-12-8z' opacity='0.35'/></svg>");
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: translate(-50%, -50%);
+            transition: transform 0.12s ease, filter 0.2s ease, opacity 0.2s ease;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
         }
 
         #custom-cursor.hover {
-            transform: scale(2);
-            background: var(--flame-red);
-            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(1.2) rotate(-12deg);
+            filter: drop-shadow(0 8px 16px rgba(230, 57, 70, 0.45));
         }
 
         nav {
@@ -58,6 +78,7 @@
             align-items: center;
             background: rgba(29, 29, 29, 0.95);
             backdrop-filter: blur(10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
         }
 
         .logo {
@@ -152,6 +173,7 @@
             right: 30px;
             background: rgba(230, 57, 70, 0.95);
             backdrop-filter: blur(10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
             padding: 20px 40px;
             border-radius: 50px;
             color: white;
@@ -319,14 +341,15 @@
             font-size: 1.5rem;
             color: var(--charcoal);
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
         }
 
         .quantity-btn:hover {
-            background: var(--burnt-orange);
+            background: var(--flame-red);
             color: white;
-            transform: scale(1.1);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
         }
 
         .quantity-display {
@@ -409,18 +432,19 @@
 
         .checkout-btn {
             width: 100%;
-            padding: 25px;
-            background: var(--flame-red);
+            padding: 24px;
+            background: linear-gradient(135deg, var(--flame-red), var(--burnt-orange));
             color: white;
             border: none;
             font-family: 'Bebas Neue', sans-serif;
             font-size: 1.8rem;
             letter-spacing: 0.2em;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 999px;
+            box-shadow: 0 18px 40px rgba(230, 57, 70, 0.35);
         }
 
         .checkout-btn::before {
@@ -439,9 +463,8 @@
         }
 
         .checkout-btn:hover {
-            background: var(--deep-red);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 24px 50px rgba(230, 57, 70, 0.45);
         }
 
         .contact-note {
