@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bird x Goat - Delaware Pepper Co.</title>
-    <meta name="description" content="Bird x Goat blend pepper flakes. 70k SHU average. Smoky, tangy, and earthy everyday heat. Hand-crafted in Delaware.">
+    <meta name="description" content="Bird x Goat blended pepper flakes. 70,000 SHU average. Smoky, tangy, and earthy everyday heat. Hand-crafted in Delaware.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23E63946' d='M42 8c-6 2-10 7-11 14-9 2-16 10-15 20 1 12 12 18 23 15 10-2 19-12 19-24 0-11-6-20-16-25z'/><path fill='%23228B22' d='M38 6c1-4 4-6 9-6 2 6-1 10-6 12-3 2-5 4-7 7-1-5 0-9 4-13z'/></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/global.css">
@@ -14,10 +14,15 @@
     <a href="#main" class="skip-link">Skip to main content</a>
     <div id="custom-cursor"></div>
     <div class="nav-overlay"></div>
+
     <header>
         <nav>
             <div class="logo"><a href="index.html">DELAWARE PEPPER CO.</a></div>
-            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="products.html">Products</a></li>
@@ -27,62 +32,122 @@
             </ul>
         </nav>
     </header>
+
     <main id="main">
         <section class="product-hero">
             <div class="product-image-section">
-                <a href="products.html" class="back-link">&#8592; Back to All Products</a>
+                <a href="products.html" class="back-link">← Back to All Products</a>
                 <div class="product-image-main gradient-bird-goat">
                     <span class="heat-badge-large">MEDIUM</span>
                 </div>
             </div>
+
             <div class="product-info-section">
                 <p class="product-category">Blended Flakes</p>
                 <h1 class="product-title">Bird x<br>Goat</h1>
                 <span class="product-shu-display">70,000 SHU Average</span>
+
                 <p class="product-description">Perfect for those who want authentic heat without the insanity. This blend marries the bright, smoky notes of Bird (Crispy Tepin) with the earthy complexity of Goat's Weed for an everyday heat that never gets boring.</p>
+
                 <div class="product-specs">
-                    <div class="spec-row"><span class="spec-label">Heat Level</span><span class="spec-value">Medium Heat</span></div>
-                    <div class="spec-row"><span class="spec-label">SHU Range</span><span class="spec-value">70,000 SHU Average</span></div>
-                    <div class="spec-row"><span class="spec-label">Flavor Profile</span><span class="spec-value">Smoky, tangy, and earthy</span></div>
-                    <div class="spec-row"><span class="spec-label">Type</span><span class="spec-value">Blended Flakes</span></div>
-                    <div class="spec-row"><span class="spec-label">Peppers</span><span class="spec-value">Bird (Crispy Tepin) and Goat's Weed</span></div>
+                    <div class="spec-row">
+                        <span class="spec-label">Heat Level</span>
+                        <span class="spec-value">Medium Heat</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">SHU Range</span>
+                        <span class="spec-value">70,000 SHU Average</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Flavor Profile</span>
+                        <span class="spec-value">Smoky, tangy, and earthy</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Type</span>
+                        <span class="spec-value">Blended Flakes</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Peppers</span>
+                        <span class="spec-value">Bird (Crispy Tepin) and Goat's Weed</span>
+                    </div>
                 </div>
+
                 <div class="checkout-section">
                     <div class="checkout-content">
                         <h3 class="checkout-title">Order Now</h3>
                         <p class="checkout-subtitle">Handcrafted in small batches in Delaware</p>
+
                         <div class="quantity-selector">
                             <label class="quantity-label">Quantity (Grams)</label>
                             <div class="quantity-controls">
-                                <button class="quantity-btn" onclick="decreaseQuantity()" aria-label="Decrease quantity">&#8722;</button>
+                                <button class="quantity-btn" onclick="decreaseQuantity()" aria-label="Decrease quantity">−</button>
                                 <span class="quantity-display" id="quantity">10</span>
                                 <button class="quantity-btn" onclick="increaseQuantity()" aria-label="Increase quantity">+</button>
                             </div>
                         </div>
+
                         <div class="unit-selector">
                             <label class="quantity-label">Select Package</label>
                             <div class="unit-options">
-                                <label class="unit-option active"><input type="radio" name="unit" value="sample" checked><div class="unit-name">Sample</div><div class="unit-price">10g - Perfect to try</div></label>
-                                <label class="unit-option"><input type="radio" name="unit" value="standard"><div class="unit-name">Standard</div><div class="unit-price">50g - Most popular</div></label>
-                                <label class="unit-option"><input type="radio" name="unit" value="bulk"><div class="unit-name">Bulk</div><div class="unit-price">100g - Best value</div></label>
-                                <label class="unit-option"><input type="radio" name="unit" value="custom"><div class="unit-name">Custom</div><div class="unit-price">Your choice</div></label>
+                                <label class="unit-option active">
+                                    <input type="radio" name="unit" value="sample" checked>
+                                    <div class="unit-name">Sample</div>
+                                    <div class="unit-price">10g - Perfect to try</div>
+                                </label>
+                                <label class="unit-option">
+                                    <input type="radio" name="unit" value="standard">
+                                    <div class="unit-name">Standard</div>
+                                    <div class="unit-price">50g - Most popular</div>
+                                </label>
+                                <label class="unit-option">
+                                    <input type="radio" name="unit" value="bulk">
+                                    <div class="unit-name">Bulk</div>
+                                    <div class="unit-price">100g - Best value</div>
+                                </label>
+                                <label class="unit-option">
+                                    <input type="radio" name="unit" value="custom">
+                                    <div class="unit-name">Custom</div>
+                                    <div class="unit-price">Your choice</div>
+                                </label>
                             </div>
                         </div>
-                        <div class="price-display"><div class="price-label">Contact for Pricing</div><div class="price-amount">INQUIRY</div></div>
+
+                        <div class="price-display">
+                            <div class="price-label">Contact for Pricing</div>
+                            <div class="price-amount">INQUIRY</div>
+                        </div>
+
                         <button class="checkout-btn" onclick="initiateCheckout()">Request Quote</button>
-                        <p class="contact-note">Email us at <a href="mailto:Htam@delawarepepperco.com">Htam@delawarepepperco.com</a></p>
+
+                        <p class="contact-note">
+                            Email us at <a href="mailto:Htam@delawarepepperco.com">Htam@delawarepepperco.com</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="details-section">
             <div class="details-grid">
-                <div class="detail-card"><div class="detail-icon" role="img" aria-label="sun">&#x2600;&#xFE0F;</div><h3 class="detail-title">Everyday Heat</h3><p class="detail-text">Accessible heat level perfect for daily use. Enough kick to be exciting, not overwhelming.</p></div>
-                <div class="detail-card"><div class="detail-icon" role="img" aria-label="leaves">&#x1F342;</div><h3 class="detail-title">Balanced Flavor</h3><p class="detail-text">Smoky brightness meets earthy depth. A perfectly balanced pepper blend.</p></div>
-                <div class="detail-card"><div class="detail-icon" role="img" aria-label="versatile">&#x1F504;</div><h3 class="detail-title">Versatile</h3><p class="detail-text">Works with everything from eggs to tacos to BBQ. Your new go-to pepper flakes.</p></div>
+                <div class="detail-card">
+                    <div class="detail-icon" role="img" aria-label="sun">☀️</div>
+                    <h3 class="detail-title">Everyday Heat</h3>
+                    <p class="detail-text">Accessible heat level perfect for daily use. Enough kick to be exciting, not overwhelming.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon" role="img" aria-label="leaf">🍂</div>
+                    <h3 class="detail-title">Balanced Flavor</h3>
+                    <p class="detail-text">Smoky brightness meets earthy depth. A perfectly balanced pepper blend.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon" role="img" aria-label="cycle">🔄</div>
+                    <h3 class="detail-title">Versatile</h3>
+                    <p class="detail-text">Works with everything from eggs to tacos to BBQ. Your new go-to pepper flakes.</p>
+                </div>
             </div>
         </section>
     </main>
+
     <script src="js/global.js"></script>
     <script src="js/product-detail.js"></script>
 </body>
