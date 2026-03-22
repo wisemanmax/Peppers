@@ -1,0 +1,312 @@
+/* Page Header */
+.page-header {
+    padding: 160px 60px 80px;
+    background: linear-gradient(135deg, var(--deep-red) 0%, var(--charcoal) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.03) 2px,
+            rgba(0,0,0,0.03) 4px
+        );
+    pointer-events: none;
+    animation: grain 8s steps(10) infinite;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(230, 57, 70, 0.25), transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(247, 127, 0, 0.2), transparent 50%);
+    mix-blend-mode: screen;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.page-header h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--cream);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Products Container */
+.products-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 80px 60px;
+}
+
+.products-intro {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.products-intro p {
+    font-size: 1.3rem;
+    color: var(--smoke);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+.email-note {
+    text-align: center;
+    margin: 60px 0;
+    padding: 30px;
+    background: var(--charcoal);
+    color: var(--cream);
+    border-left: 5px solid var(--flame-red);
+}
+
+.email-note p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.email-note a {
+    color: var(--burnt-orange);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.email-note a:hover {
+    color: var(--flame-red);
+}
+
+/* Product Categories */
+.category-section {
+    margin-bottom: 100px;
+}
+
+.category-header {
+    margin-bottom: 50px;
+}
+
+.category-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--charcoal);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+
+.category-subtitle {
+    font-size: 1.1rem;
+    color: var(--smoke);
+    font-style: italic;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 50px;
+}
+
+.product-card {
+    background: white;
+    border: 1px solid rgba(29, 29, 29, 0.1);
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+}
+
+.product-image-container {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(247, 127, 0, 0.1));
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.heat-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white;
+}
+
+.heat-badge.hot {
+    background: var(--flame-red);
+}
+
+.heat-badge.medium {
+    background: var(--burnt-orange);
+}
+
+.heat-badge.mild {
+    background: #FFD60A;
+    color: var(--charcoal);
+}
+
+.product-info {
+    border-top: 2px solid var(--cream);
+    padding-top: 20px;
+}
+
+.product-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--charcoal);
+    margin-bottom: 5px;
+    letter-spacing: 0.05em;
+}
+
+.product-shu {
+    font-size: 0.9rem;
+    color: var(--flame-red);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.product-details {
+    margin-bottom: 15px;
+}
+
+.product-detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--cream);
+    font-size: 0.95rem;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--charcoal);
+}
+
+.detail-value {
+    color: var(--smoke);
+    text-align: right;
+}
+
+.product-flavor {
+    font-style: italic;
+    color: var(--smoke);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-peppers {
+    background: var(--cream);
+    padding: 15px;
+    margin-top: 20px;
+    border-left: 3px solid var(--burnt-orange);
+}
+
+.product-peppers-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+    color: var(--charcoal);
+}
+
+.product-peppers-list {
+    color: var(--smoke);
+    font-size: 0.95rem;
+}
+
+/* Heat Reference CTA */
+.heat-reference-cta {
+    background: var(--charcoal);
+    padding: 80px 60px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.heat-reference-cta h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    color: var(--cream);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.heat-reference-cta p {
+    color: rgba(248, 244, 232, 0.8);
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-heat-ref {
+    display: inline-block;
+    padding: 20px 60px;
+    background: linear-gradient(135deg, var(--flame-red), var(--burnt-orange));
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 18px 40px rgba(230, 57, 70, 0.35);
+}
+
+.btn-heat-ref:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 24px 50px rgba(230, 57, 70, 0.5);
+}
+
+.btn.product-btn {
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header,
+    .products-container,
+    .heat-reference-cta {
+        padding: 60px 30px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
