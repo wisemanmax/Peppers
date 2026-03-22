@@ -4,754 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bird x Goat - Delaware Pepper Co.</title>
+    <meta name="description" content="Bird x Goat blended pepper flakes. 70,000 SHU average. Smoky, tangy, and earthy everyday heat. Hand-crafted in Delaware.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23E63946' d='M42 8c-6 2-10 7-11 14-9 2-16 10-15 20 1 12 12 18 23 15 10-2 19-12 19-24 0-11-6-20-16-25z'/><path fill='%23228B22' d='M38 6c1-4 4-6 9-6 2 6-1 10-6 12-3 2-5 4-7 7-1-5 0-9 4-13z'/></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --flame-red: #E63946;
-            --deep-red: #A4161A;
-            --burnt-orange: #F77F00;
-            --cream: #F8F4E8;
-            --charcoal: #1D1D1D;
-            --smoke: #4A4A4A;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        ::selection {
-            background: rgba(230, 57, 70, 0.25);
-            color: var(--charcoal);
-        }
-
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible,
-        textarea:focus-visible {
-            outline: 2px dashed var(--burnt-orange);
-            outline-offset: 4px;
-        }
-
-
-        body {
-            font-family: 'Crimson Pro', serif;
-            background: var(--cream);
-            color: var(--charcoal);
-            overflow-x: hidden;
-            cursor: none;
-        }
-
-        
-        #custom-cursor {
-            width: 36px;
-            height: 36px;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23E63946' d='M42 8c-6 2-10 7-11 14-9 2-16 10-15 20 1 12 12 18 23 15 10-2 19-12 19-24 0-11-6-20-16-25z'/><path fill='%23228B22' d='M38 6c1-4 4-6 9-6 2 6-1 10-6 12-3 2-5 4-7 7-1-5 0-9 4-13z'/><path fill='%23B71C1C' d='M24 32c-4 2-6 6-5 10 1 6 7 9 13 8 5-1 10-6 9-12-1-6-6-9-12-8z' opacity='0.35'/></svg>");
-            background-size: contain;
-            background-repeat: no-repeat;
-            transform: translate(-50%, -50%);
-            transition: transform 0.12s ease, filter 0.2s ease, opacity 0.2s ease;
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.25));
-        }
-
-        #custom-cursor.hover {
-            transform: translate(-50%, -50%) scale(1.2) rotate(-12deg);
-            filter: drop-shadow(0 8px 16px rgba(230, 57, 70, 0.45));
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 30px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(29, 29, 29, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-        }
-
-        .logo {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            color: var(--cream);
-            letter-spacing: 0.1em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--cream);
-            text-decoration: none;
-            font-size: 0.95rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 600;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--flame-red);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .product-hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 140px 60px 60px;
-            gap: 80px;
-            max-width: 1600px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .product-image-section {
-            position: relative;
-            animation: fadeInLeft 1s ease-out;
-        }
-
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .product-image-main {
-            width: 100%;
-            aspect-ratio: 3/4;
-            background: linear-gradient(135deg, #CD853F 0%, #DAA520 50%, #F4A460 100%);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 30px 90px rgba(0,0,0,0.4), inset 0 0 100px rgba(255,255,255,0.05);
-        }
-
-        .product-image-main::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
-            animation: grain 8s steps(10) infinite;
-        }
-
-        @keyframes grain {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-10%, 10%); }
-        }
-
-        .heat-badge-large {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(230, 57, 70, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-            padding: 20px 40px;
-            border-radius: 50px;
-            color: white;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            letter-spacing: 0.1em;
-            box-shadow: 0 10px 40px rgba(230, 57, 70, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .product-info-section {
-            animation: fadeInRight 1s ease-out;
-        }
-
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .product-category {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--burnt-orange);
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .product-title {
-            font-family: 'Anton', sans-serif;
-            font-size: clamp(3rem, 6vw, 5rem);
-            color: var(--charcoal);
-            line-height: 0.95;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: -0.02em;
-        }
-
-        .product-shu-display {
-            display: inline-block;
-            background: var(--charcoal);
-            color: var(--cream);
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 40px;
-            letter-spacing: 0.1em;
-        }
-
-        .product-description {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: var(--smoke);
-            margin-bottom: 40px;
-            border-left: 4px solid var(--flame-red);
-            padding-left: 30px;
-        }
-
-        .product-specs {
-            background: white;
-            border: 3px solid var(--charcoal);
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-
-        .spec-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--cream);
-        }
-
-        .spec-row:last-child {
-            border-bottom: none;
-        }
-
-        .spec-label {
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-        }
-
-        .spec-value {
-            color: var(--smoke);
-            font-size: 1.1rem;
-        }
-
-        .checkout-section {
-            background: linear-gradient(135deg, var(--charcoal) 0%, #2a2a2a 100%);
-            padding: 50px;
-            border-radius: 4px;
-            box-shadow: 0 30px 90px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .checkout-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(247, 127, 0, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .checkout-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .checkout-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2rem;
-            color: var(--cream);
-            margin-bottom: 10px;
-            letter-spacing: 0.1em;
-        }
-
-        .checkout-subtitle {
-            color: rgba(248, 244, 232, 0.7);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .quantity-selector {
-            margin-bottom: 30px;
-        }
-
-        .quantity-label {
-            color: var(--cream);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 0.15em;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .quantity-btn {
-            width: 50px;
-            height: 50px;
-            background: var(--cream);
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            color: var(--charcoal);
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-        }
-
-        .quantity-btn:hover {
-            background: var(--flame-red);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-        }
-
-        .quantity-display {
-            font-family: 'Anton', sans-serif;
-            font-size: 2.5rem;
-            color: var(--cream);
-            min-width: 80px;
-            text-align: center;
-        }
-
-        .unit-selector {
-            margin-bottom: 30px;
-        }
-
-        .unit-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .unit-option {
-            background: rgba(248, 244, 232, 0.1);
-            border: 2px solid rgba(248, 244, 232, 0.3);
-            padding: 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .unit-option:hover {
-            border-color: var(--burnt-orange);
-            background: rgba(247, 127, 0, 0.2);
-        }
-
-        .unit-option.active {
-            border-color: var(--flame-red);
-            background: rgba(230, 57, 70, 0.2);
-        }
-
-        .unit-option input[type="radio"] {
-            display: none;
-        }
-
-        .unit-name {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.5rem;
-            color: var(--cream);
-            margin-bottom: 5px;
-            letter-spacing: 0.1em;
-        }
-
-        .unit-price {
-            color: rgba(248, 244, 232, 0.7);
-            font-size: 0.95rem;
-        }
-
-        .price-display {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 25px;
-            border-radius: 4px;
-            margin-bottom: 30px;
-            border-left: 4px solid var(--flame-red);
-        }
-
-        .price-label {
-            color: rgba(248, 244, 232, 0.7);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 10px;
-        }
-
-        .price-amount {
-            font-family: 'Anton', sans-serif;
-            font-size: 3rem;
-            color: var(--cream);
-            line-height: 1;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 24px;
-            background: linear-gradient(135deg, var(--flame-red), var(--burnt-orange));
-            color: white;
-            border: none;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            letter-spacing: 0.2em;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            border-radius: 999px;
-            box-shadow: 0 18px 40px rgba(230, 57, 70, 0.35);
-        }
-
-        .checkout-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .checkout-btn:hover::before {
-            left: 100%;
-        }
-
-        .checkout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 24px 50px rgba(230, 57, 70, 0.45);
-        }
-
-        .contact-note {
-            text-align: center;
-            margin-top: 20px;
-            color: rgba(248, 244, 232, 0.6);
-            font-size: 0.95rem;
-        }
-
-        .contact-note a {
-            color: var(--burnt-orange);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .contact-note a:hover {
-            color: var(--flame-red);
-        }
-
-        .details-section {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 80px 60px;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .detail-card {
-            background: white;
-            border: 3px solid var(--charcoal);
-            padding: 40px;
-            transition: transform 0.3s ease;
-        }
-
-        .detail-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
-        }
-
-        .detail-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .detail-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            letter-spacing: 0.1em;
-        }
-
-        .detail-text {
-            color: var(--smoke);
-            line-height: 1.7;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--charcoal);
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            color: var(--flame-red);
-            transform: translateX(-5px);
-        }
-
-        @media (max-width: 968px) {
-            .product-hero {
-                grid-template-columns: 1fr;
-                padding: 120px 30px 60px;
-            }
-            nav {
-                padding: 20px 30px;
-            }
-            .nav-links {
-                gap: 20px;
-                font-size: 0.85rem;
-            }
-            .details-section {
-                padding: 60px 30px;
-            }
-            body {
-                cursor: auto;
-            }
-            #custom-cursor {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/product-detail.css">
 </head>
-<body>
+<body data-product="Bird x Goat">
+    <a href="#main" class="skip-link">Skip to main content</a>
     <div id="custom-cursor"></div>
+    <div class="nav-overlay"></div>
 
-    <nav>
-        <div class="logo">DELAWARE PEPPER CO.</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="index.html#story">Story</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <div class="logo"><a href="index.html">DELAWARE PEPPER CO.</a></div>
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="heat-reference.html">Heat Reference</a></li>
+                <li><a href="index.html#story">Our Story</a></li>
+                <li><a href="mailto:Htam@delawarepepperco.com">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <section class="product-hero">
-        <div class="product-image-section">
-            <a href="products.html" class="back-link">← Back to All Products</a>
-            <div class="product-image-main">
-                <span class="heat-badge-large">🌶️ MEDIUM</span>
-            </div>
-        </div>
-
-        <div class="product-info-section">
-            <p class="product-category">Blended Flakes</p>
-            <h1 class="product-title">Bird x<br>Goat</h1>
-            <span class="product-shu-display">70,000 SHU Average</span>
-            
-            <p class="product-description">Perfect for those who want authentic heat without the insanity. This blend marries the bright, smoky notes of Bird (Crispy Tepin) with the earthy complexity of Goat's Weed for an everyday heat that never gets boring.</p>
-
-            <div class="product-specs">
-                <div class="spec-row">
-                    <span class="spec-label">Heat Level</span>
-                    <span class="spec-value">Medium Heat</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-label">SHU Range</span>
-                    <span class="spec-value">70,000 SHU Average</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-label">Flavor Profile</span>
-                    <span class="spec-value">Smoky, tangy, and earthy</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-label">Type</span>
-                    <span class="spec-value">Blended Flakes</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-label">Peppers</span>
-                    <span class="spec-value">Bird (Crispy Tepin) and Goat's Weed</span>
+    <main id="main">
+        <section class="product-hero">
+            <div class="product-image-section">
+                <a href="products.html" class="back-link">← Back to All Products</a>
+                <div class="product-image-main gradient-bird-goat">
+                    <span class="heat-badge-large">MEDIUM</span>
                 </div>
             </div>
 
-            <div class="checkout-section">
-                <div class="checkout-content">
-                    <h3 class="checkout-title">Order Now</h3>
-                    <p class="checkout-subtitle">Handcrafted in small batches in Delaware</p>
+            <div class="product-info-section">
+                <p class="product-category">Blended Flakes</p>
+                <h1 class="product-title">Bird x<br>Goat</h1>
+                <span class="product-shu-display">70,000 SHU Average</span>
 
-                    <div class="quantity-selector">
-                        <label class="quantity-label">Quantity (Grams)</label>
-                        <div class="quantity-controls">
-                            <button class="quantity-btn" onclick="decreaseQuantity()">−</button>
-                            <span class="quantity-display" id="quantity">10</span>
-                            <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                <p class="product-description">Perfect for those who want authentic heat without the insanity. This blend marries the bright, smoky notes of Bird (Crispy Tepin) with the earthy complexity of Goat's Weed for an everyday heat that never gets boring.</p>
+
+                <div class="product-specs">
+                    <div class="spec-row">
+                        <span class="spec-label">Heat Level</span>
+                        <span class="spec-value">Medium Heat</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">SHU Range</span>
+                        <span class="spec-value">70,000 SHU Average</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Flavor Profile</span>
+                        <span class="spec-value">Smoky, tangy, and earthy</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Type</span>
+                        <span class="spec-value">Blended Flakes</span>
+                    </div>
+                    <div class="spec-row">
+                        <span class="spec-label">Peppers</span>
+                        <span class="spec-value">Bird (Crispy Tepin) and Goat's Weed</span>
+                    </div>
+                </div>
+
+                <div class="checkout-section">
+                    <div class="checkout-content">
+                        <h3 class="checkout-title">Order Now</h3>
+                        <p class="checkout-subtitle">Handcrafted in small batches in Delaware</p>
+
+                        <div class="quantity-selector">
+                            <label class="quantity-label">Quantity (Grams)</label>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="decreaseQuantity()" aria-label="Decrease quantity">−</button>
+                                <span class="quantity-display" id="quantity">10</span>
+                                <button class="quantity-btn" onclick="increaseQuantity()" aria-label="Increase quantity">+</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="unit-selector">
-                        <label class="quantity-label">Select Package</label>
-                        <div class="unit-options">
-                            <label class="unit-option active">
-                                <input type="radio" name="unit" value="sample" checked>
-                                <div class="unit-name">Sample</div>
-                                <div class="unit-price">10g - Perfect to try</div>
-                            </label>
-                            <label class="unit-option">
-                                <input type="radio" name="unit" value="standard">
-                                <div class="unit-name">Standard</div>
-                                <div class="unit-price">50g - Most popular</div>
-                            </label>
-                            <label class="unit-option">
-                                <input type="radio" name="unit" value="bulk">
-                                <div class="unit-name">Bulk</div>
-                                <div class="unit-price">100g - Best value</div>
-                            </label>
-                            <label class="unit-option">
-                                <input type="radio" name="unit" value="custom">
-                                <div class="unit-name">Custom</div>
-                                <div class="unit-price">Your choice</div>
-                            </label>
+                        <div class="unit-selector">
+                            <label class="quantity-label">Select Package</label>
+                            <div class="unit-options">
+                                <label class="unit-option active">
+                                    <input type="radio" name="unit" value="sample" checked>
+                                    <div class="unit-name">Sample</div>
+                                    <div class="unit-price">10g - Perfect to try</div>
+                                </label>
+                                <label class="unit-option">
+                                    <input type="radio" name="unit" value="standard">
+                                    <div class="unit-name">Standard</div>
+                                    <div class="unit-price">50g - Most popular</div>
+                                </label>
+                                <label class="unit-option">
+                                    <input type="radio" name="unit" value="bulk">
+                                    <div class="unit-name">Bulk</div>
+                                    <div class="unit-price">100g - Best value</div>
+                                </label>
+                                <label class="unit-option">
+                                    <input type="radio" name="unit" value="custom">
+                                    <div class="unit-name">Custom</div>
+                                    <div class="unit-price">Your choice</div>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="price-display">
-                        <div class="price-label">Contact for Pricing</div>
-                        <div class="price-amount">INQUIRY</div>
-                    </div>
+                        <div class="price-display">
+                            <div class="price-label">Contact for Pricing</div>
+                            <div class="price-amount">INQUIRY</div>
+                        </div>
 
-                    <button class="checkout-btn" onclick="initiateCheckout()">Request Quote</button>
-                    
-                    <p class="contact-note">
-                        Email us at <a href="mailto:Htam@delawarepepperco.com">Htam@delawarepepperco.com</a>
-                    </p>
+                        <button class="checkout-btn" onclick="initiateCheckout()">Request Quote</button>
+
+                        <p class="contact-note">
+                            Email us at <a href="mailto:Htam@delawarepepperco.com">Htam@delawarepepperco.com</a>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="details-section">
-        <div class="details-grid">
-            <div class="detail-card">
-                <div class="detail-icon">☀️</div>
-                <h3 class="detail-title">Everyday Heat</h3>
-                <p class="detail-text">Accessible heat level perfect for daily use. Enough kick to be exciting, not overwhelming.</p>
+        <section class="details-section">
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon" role="img" aria-label="sun">☀️</div>
+                    <h3 class="detail-title">Everyday Heat</h3>
+                    <p class="detail-text">Accessible heat level perfect for daily use. Enough kick to be exciting, not overwhelming.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon" role="img" aria-label="leaf">🍂</div>
+                    <h3 class="detail-title">Balanced Flavor</h3>
+                    <p class="detail-text">Smoky brightness meets earthy depth. A perfectly balanced pepper blend.</p>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon" role="img" aria-label="cycle">🔄</div>
+                    <h3 class="detail-title">Versatile</h3>
+                    <p class="detail-text">Works with everything from eggs to tacos to BBQ. Your new go-to pepper flakes.</p>
+                </div>
             </div>
-            <div class="detail-card">
-                <div class="detail-icon">🍂</div>
-                <h3 class="detail-title">Balanced Flavor</h3>
-                <p class="detail-text">Smoky brightness meets earthy depth. A perfectly balanced pepper blend.</p>
-            </div>
-            <div class="detail-card">
-                <div class="detail-icon">🔄</div>
-                <h3 class="detail-title">Versatile</h3>
-                <p class="detail-text">Works with everything from eggs to tacos to BBQ. Your new go-to pepper flakes.</p>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <script>
-        const cursor = document.getElementById('custom-cursor');
-        const links = document.querySelectorAll('a, button, label');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        function increaseQuantity() {
-            const quantityEl = document.getElementById('quantity');
-            let current = parseInt(quantityEl.textContent);
-            quantityEl.textContent = current + 5;
-        }
-
-        function decreaseQuantity() {
-            const quantityEl = document.getElementById('quantity');
-            let current = parseInt(quantityEl.textContent);
-            if (current > 5) {
-                quantityEl.textContent = current - 5;
-            }
-        }
-
-        document.querySelectorAll('.unit-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.unit-option').forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                this.querySelector('input[type="radio"]').checked = true;
-                
-                const value = this.querySelector('input').value;
-                const quantityEl = document.getElementById('quantity');
-                if (value === 'sample') quantityEl.textContent = '10';
-                else if (value === 'standard') quantityEl.textContent = '50';
-                else if (value === 'bulk') quantityEl.textContent = '100';
-            });
-        });
-
-        function initiateCheckout() {
-            const quantity = document.getElementById('quantity').textContent;
-            const unit = document.querySelector('.unit-option.active .unit-name').textContent;
-            const subject = encodeURIComponent('Bird x Goat - Order Inquiry');
-            const body = encodeURIComponent(`Hi Delaware Pepper Co,
-
-I'm interested in ordering Bird x Goat pepper flakes.
-
-Details:
-- Product: Bird x Goat
-- Package: ${unit}
-- Quantity: ${quantity}g
-
-Please send me pricing and availability information.
-
-Thank you!`);
-            
-            window.location.href = `mailto:Htam@delawarepepperco.com?subject=${subject}&body=${body}`;
-        }
-    </script>
+    <script src="js/global.js"></script>
+    <script src="js/product-detail.js"></script>
 </body>
 </html>
